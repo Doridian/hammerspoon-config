@@ -12,9 +12,9 @@ local function dockStateDispatcher(newIsDocked, isEvent)
         handler(isDocked, isEvent)
     end
 end
-local function usbWatcherFn(eventType, productName, vendorName, vendorID, productID)
-    if vendorID == config.vendorID and productID == config.productID then
-        dockStateDispatcher(eventType == "added", true)
+local function usbWatcherFn(event)
+    if event.vendorID == config.vendorID and event.productID == config.productID then
+        dockStateDispatcher(event.eventType == "added", true)
     end
 end
 
