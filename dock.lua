@@ -1,0 +1,68 @@
+-- Detect when we do and undock
+local VENDOR_ID_DOCK = 0x2188
+local PRODUCT_ID_DOCK = 0x0034
+
+local isDocked = nil
+local dockStateHandlers = {}
+local function dockStateDispatcher(newIsDocked, isEvent)
+    if isDocked == newIsDocked then
+        return
+    end
+    isDocked = newIsDocked
+    for _, handler in pairs(dockStateHandlers) do
+        handler(isDocked, isEvent)
+    end
+end
+local function usbWatcherFn(eventType, productName, vendorName, vendorID, productID)
+    if vendorID == VENDOR_ID_DOCK and productID == PRODUCT_ID_DOCK then
+        dockStateDispatcher(eventType == "added", true)
+    end
+end
+
+local function activeDockCheck()
+    local dockFound = false
+    for _, dev in pairs(hs.usb.attachedDevices()) do
+        if dev.vendorID == VENDOR_ID_DOCK and dev.productID == PRODUCT_ID_DOCK then
+            dockStateDispatcher(true, false)
+            dockFound = true
+            break
+        end
+    end
+    if not dockFound then
+        dockStateDispatcher(false, false)
+    end
+end
+
+local usbWatcher
+local M = {}
+function M.start()
+    M.stop()
+    usbWatcher = hs.usb.watcher.new(usbWatcherFn)
+    usbWatcher:start()
+    activeDockCheck()
+end
+function M.stop()
+    if usbWatcher then
+        usbWatcher:stop()
+        usbWatcher = nil
+    end
+end
+function M.add_handler(fn)
+    table.insert(dockStateHandlers, fn)
+end
+function M.remove_handler(fn)
+    local idx = -1
+    for i, handler in pairs(dockStateHandlers) do
+        if handler == fn then
+            idx = i
+            break
+        end
+    end
+    if idx > 0 then
+        table.remove(dockStateHandlers, idx)
+    end
+end
+function M.is_docked()
+    return isDocked
+end
+return M
