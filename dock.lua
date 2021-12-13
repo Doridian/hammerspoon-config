@@ -1,6 +1,5 @@
 -- Detect when we do and undock
-local VENDOR_ID_DOCK = 0x2188
-local PRODUCT_ID_DOCK = 0x0034
+local config = require("config").get("dock")
 
 local isDocked = nil
 local dockStateHandlers = {}
@@ -14,7 +13,7 @@ local function dockStateDispatcher(newIsDocked, isEvent)
     end
 end
 local function usbWatcherFn(eventType, productName, vendorName, vendorID, productID)
-    if vendorID == VENDOR_ID_DOCK and productID == PRODUCT_ID_DOCK then
+    if vendorID == config.vendorID and productID == config.productID then
         dockStateDispatcher(eventType == "added", true)
     end
 end
@@ -22,7 +21,7 @@ end
 local function activeDockCheck()
     local dockFound = false
     for _, dev in pairs(hs.usb.attachedDevices()) do
-        if dev.vendorID == VENDOR_ID_DOCK and dev.productID == PRODUCT_ID_DOCK then
+        if dev.vendorID == config.vendorID and dev.productID == config.productID then
             dockStateDispatcher(true, false)
             dockFound = true
             break

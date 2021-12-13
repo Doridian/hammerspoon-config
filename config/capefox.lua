@@ -1,5 +1,5 @@
-local screenConfigTable = {}
-screenConfigTable["LG HDR WQHD+"] = {
+local screens = {}
+screens["LG HDR WQHD+"] = {
     mode = {
         w = 3840,
         h = 1600,
@@ -12,7 +12,7 @@ screenConfigTable["LG HDR WQHD+"] = {
         y = 0,
     },
 }
-screenConfigTable["LG ULTRAGEAR"] = {
+screens["LG ULTRAGEAR"] = {
     mode = {
         w = 2560,
         h = 1440,
@@ -26,6 +26,22 @@ screenConfigTable["LG ULTRAGEAR"] = {
     },
 }
 
+local function automationCtor()
+    local dock = require("dock")
+    local homeassistant = require("homeassistant")
+    dock.add_handler(function(isDocked)
+        if isDocked then
+            homeassistant.switch("switch.dori_pc_relay", true)
+        end
+    end)
+end
+
 return {
-    screens = screenConfigTable,
+    screens = screens,
+    dock = {
+        vendorID = 0x2188,
+        productID = 0x0034,
+    },
+    load = {"screens", "dock"},
+    ctor = automationCtor,
 }

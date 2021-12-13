@@ -1,12 +1,20 @@
-local screens = require("screens")
-local dock = require("dock")
-local homeassistant = require("homeassistant")
+local config = require("config")
 
-dock.add_handler(function(isDocked)
-    if isDocked then
-        
+local to_load = config.get("load")
+
+local modules = {}
+for _, name in pairs(config.get("load")) do
+    modules[name] = require(name)
+end
+
+local ctor = config.get("ctor")
+if ctor then
+    ctor()
+end
+
+for name, mod in pairs(modules) do
+    if mod.start then
+        print("Starting module ", name)
+        mod.start()
     end
-end)
-
-screens.start()
-dock.start()
+end
