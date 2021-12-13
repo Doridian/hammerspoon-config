@@ -4,6 +4,7 @@ local to_load = config.get("load")
 
 local modules = {}
 for _, name in pairs(config.get("load")) do
+    print("Loading module ", name)
     modules[name] = require(name)
 end
 
