@@ -1,8 +1,8 @@
 local secrets = require("config").get_secret("homeassistant")
 local headers = {
-    Authorization = "Bearer " .. secrets.token
+    Authorization = "Bearer " .. secrets.token,
+    ["Content-Type"] = "application/json",
 }
-headers["Content-Type"] = "application/json"
 
 local M = {}
 function M.control(cls, id, control)
