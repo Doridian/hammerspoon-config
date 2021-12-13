@@ -46,10 +46,10 @@ function M.stop()
         usbWatcher = nil
     end
 end
-function M.add_handler(fn)
+function M.addHandler(fn)
     table.insert(dockStateHandlers, fn)
 end
-function M.remove_handler(fn)
+function M.removeHandler(fn)
     local idx = -1
     for i, handler in pairs(dockStateHandlers) do
         if handler == fn then
@@ -61,7 +61,7 @@ function M.remove_handler(fn)
         table.remove(dockStateHandlers, idx)
     end
 end
-function M.is_docked()
+function M.isDocked()
     return isDocked
 end
 return M

@@ -35,7 +35,7 @@ return {
     ctor = function()
         local dock = require("dock")
         local homeassistant = require("homeassistant")
-        dock.add_handler(function(isDocked)
+        dock.addHandler(function(isDocked)
             if isDocked then
                 homeassistant.switch("switch.dori_pc_relay", true)
             end

@@ -5,7 +5,7 @@ local M = {}
 function M.get(key)
     return data[key]
 end
-function M.get_secret(key)
+function M.getSecret(key)
     return secrets[key]
 end
 return M

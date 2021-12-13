@@ -1,4 +1,4 @@
-local secrets = require("config").get_secret("homeassistant")
+local secrets = require("config").getSecret("homeassistant")
 local headers = {
     Authorization = "Bearer " .. secrets.token,
     ["Content-Type"] = "application/json",
