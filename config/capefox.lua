@@ -6,7 +6,7 @@ return {
                 h = 1440,
                 scale = 1.0,
                 freq = 120,
-                depth = 7,
+                depth = 8,
             },
             origin = {
                 x = -2560,
@@ -19,7 +19,7 @@ return {
                 h = 1600,
                 scale = 1.0,
                 freq = 120,
-                depth = 7,
+                depth = 8,
             },
             origin = {
                 x = 0,

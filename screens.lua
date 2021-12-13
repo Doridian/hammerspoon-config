@@ -15,6 +15,7 @@ local function screenResolutionWatcherFn()
             local isMode = screen:currentMode()
             for param, val in pairs(shouldConfig.mode) do
                 if isMode[param] ~= val then
+                    print("Mismatch on ", name, " ", param, " (is ", isMode[param], "; should be ", val, ")")
                     fixScreenModes[screen] = shouldConfig.mode
                 end
             end
