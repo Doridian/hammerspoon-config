@@ -27,7 +27,8 @@ local function screenResolutionWatcherFn()
         end
     end
     for screen, mode in pairs(fixScreenModes) do
-        local ok = screen:setMode(mode.w, mode.h, mode.scale, mode.freq, mode.depth)
+        local isMode = screen:currentMode()
+        local ok = screen:setMode(mode.w or isMode.w, mode.h or isMode.h, mode.scale or isMode.scale, mode.freq or isMode.freq, mode.depth or isMode.depth)
         if not ok then
             hs.alert.show("This screen is running a wrong mode!", {}, screen, 15)
         end
