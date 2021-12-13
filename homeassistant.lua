@@ -9,7 +9,12 @@ function M.control(cls, id, control)
     local data = hs.json.encode({
         entity_id = id,
     })
-    print("HASS control = ", hs.http.post(secrets.url .. "/api/services/" .. cls .. "/" .. control, data, headers))
+    hs.http.asyncPost(secrets.url .. "/api/services/" .. cls .. "/" .. control, data, headers, function(status, body, responseHeaders)
+        if status == 200 then
+            return
+        end
+        print("HASS control = ", status, body)
+    end)
 end
 function M.switch(id, on)
     local control = "turn_off"
