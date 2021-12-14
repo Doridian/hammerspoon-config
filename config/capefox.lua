@@ -146,9 +146,13 @@ return {
     ctor = function()
         local dock = require("dock")
         local homeassistant = require("homeassistant")
+        local windowalign = require("windowalign")
         dock.addHandler(function(isDocked)
             if isDocked then
                 homeassistant.switch("switch.dori_pc_relay", true)
+                windowalign.load("docked")
+            else
+                windowalign.load("undocked")
             end
         end)
     end,
