@@ -2,7 +2,8 @@
 -- Detect when screens are in states they shouldn't be
 local screenConfigTable = require("config").get("screens")
 
-local function screenResolutionWatcherFn()
+local screenStateHandlers = {}
+local function screenResolutionWatcherFnInt(isEvent)
     local screens = hs.screen.allScreens()
 
     local fixScreenModes = {}
@@ -39,6 +40,13 @@ local function screenResolutionWatcherFn()
             hs.alert.show("This screen is at the wrong position!", {}, screen, 15)
         end
     end
+
+    for _, handler in pairs(screenStateHandlers) do
+        handler(isEvent)
+    end
+end
+local function screenResolutionWatcherFn()
+    screenResolutionWatcherFnInt(true)
 end
 
 local screenResolutionWatcher
@@ -47,13 +55,27 @@ function M.start()
     M.stop()
     screenResolutionWatcher = hs.screen.watcher.new(screenResolutionWatcherFn)
     screenResolutionWatcher:start()
-    screenResolutionWatcherFn()
+    screenResolutionWatcherFnInt(false)
 end
-
 function M.stop()
     if screenResolutionWatcher then
         screenResolutionWatcher:stop()
         screenResolutionWatcher = nil
+    end
+end
+function M.addHandler(fn)
+    table.insert(screenStateHandlers, fn)
+end
+function M.removeHandler(fn)
+    local idx = -1
+    for i, handler in pairs(screenStateHandlers) do
+        if handler == fn then
+            idx = i
+            break
+        end
+    end
+    if idx > 0 then
+        table.remove(screenStateHandlers, idx)
     end
 end
 return M

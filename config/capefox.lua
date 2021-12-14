@@ -145,14 +145,21 @@ return {
     load = {"screens", "dock"},
     ctor = function()
         local dock = require("dock")
+        local screens = require("screens")
         local homeassistant = require("homeassistant")
         local windowalign = require("windowalign")
-        dock.addHandler(function(isDocked)
-            if isDocked then
-                homeassistant.switch("switch.dori_pc_relay", true)
+        local function applyTheme()
+            if dock.isDocked() then
                 windowalign.load("docked")
             else
                 windowalign.load("undocked")
+            end
+        end
+        screens.addHandler(applyTheme)
+        dock.addHandler(applyTheme)
+        dock.addHandler(function(isDocked)
+            if isDocked then
+                homeassistant.switch("switch.dori_pc_relay", true)
             end
         end)
     end,
