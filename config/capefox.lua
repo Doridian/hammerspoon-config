@@ -26,7 +26,7 @@ return {
         },
     },
     windowalign = {
-        docked = {
+        default = {
             margins = {
                 x = 0,
                 y = 0,
@@ -34,18 +34,25 @@ return {
             screens = {
                 main = {
                     find = "LG HDR WQHD+",
-                    w = 3,
-                    h = 3,
+                    w = 2,
+                    h = 2,
                 },
                 side = {
                     find = "LG ULTRAGEAR",
                     w = 2,
                     h = 2,
                 },
+                builtin = {
+                    find = "Built%-in",
+                    w = 2,
+                    h = 2,
+                },
             },
+        },
+        docked = {
             windows = {
                 {
-                    find = "Google Chrome",
+                    find = "Mail",
                     screen = "side",
                     x = 0,
                     y = 0,
@@ -77,17 +84,58 @@ return {
                     h = 1,
                 },
                 {
-                    find = "Google Chrome 2",
+                    find = "Google Chrome",
                     screen = "main",
                     x = 0,
                     y = 0,
-                    w = 3,
-                    h = 3,
+                    w = 2,
+                    h = 2,
                 },
             },
         },
         undocked = {
-
+            windows = {
+                {
+                    find = "Mail",
+                    screen = "builtin",
+                    x = 0,
+                    y = 0,
+                    w = 1,
+                    h = 1,
+                },
+                {
+                    find = "Music",
+                    screen = "builtin",
+                    x = 1,
+                    y = 0,
+                    w = 1,
+                    h = 1,
+                },
+                {
+                    find = "Telegram",
+                    screen = "builtin",
+                    x = 0,
+                    y = 1,
+                    w = 1,
+                    h = 1,
+                },
+                {
+                    find = "Discord Canary",
+                    screen = "builtin",
+                    x = 1,
+                    y = 1,
+                    w = 1,
+                    h = 1,
+                },
+                {
+                    find = "Google Chrome",
+                    screen = "builtin",
+                    x = 0,
+                    y = 0,
+                    w = 2,
+                    h = 2,
+                },
+            },
         },
     },
     dock = {
