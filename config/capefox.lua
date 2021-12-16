@@ -155,7 +155,22 @@ return {
         vendorID = 0x2188,
         productID = 0x0034,
     },
-    load = {"screens", "dock"},
+    audiodevice = {
+        ["Schiit Unison Modius (eqMac)"] = {
+            priority = 4,
+            volume = 100,
+        },
+        ["Schiit Unison Modius"] = {
+            priority = 3,
+        },
+        ["MacBook Pro Speakers (eqMac)"] = {
+            priority = 2,
+        },
+        ["MacBook Pro Speakers"] = {
+            priority = 1,
+        },
+    },
+    load = {"screens", "dock", "audiodevice"},
     ctor = function()
         local dock = require("dock")
         local screens = require("screens")
