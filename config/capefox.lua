@@ -7,6 +7,7 @@ return {
                 scale = 1.0,
                 freq = 120,
             },
+            primary = 1,
             origin = {
                 x = -2560,
                 y = 0,
@@ -19,10 +20,14 @@ return {
                 scale = 1.0,
                 freq = 120,
             },
+            primary = 2,
             origin = {
                 x = 0,
                 y = 0,
             },
+        },
+        ["Built%-in"] = {
+            primary = 0,
         },
     },
     windowalign = {
@@ -34,12 +39,12 @@ return {
             screens = {
                 main = {
                     find = "LG HDR WQHD+",
-                    w = 2,
-                    h = 2,
+                    w = 1,
+                    h = 1,
                 },
                 side = {
                     find = "LG ULTRAGEAR",
-                    w = 2,
+                    w = 12,
                     h = 2,
                 },
                 builtin = {
@@ -56,15 +61,23 @@ return {
                     screen = "side",
                     x = 0,
                     y = 0,
-                    w = 1,
+                    w = 4,
+                    h = 1,
+                },
+                {
+                    find = "Deliveries",
+                    screen = "side",
+                    x = 4,
+                    y = 0,
+                    w = 3,
                     h = 1,
                 },
                 {
                     find = "Music",
                     screen = "side",
-                    x = 1,
+                    x = 7,
                     y = 0,
-                    w = 1,
+                    w = 5,
                     h = 1,
                 },
                 {
@@ -72,15 +85,15 @@ return {
                     screen = "side",
                     x = 0,
                     y = 1,
-                    w = 1,
+                    w = 6,
                     h = 1,
                 },
                 {
                     find = "Discord Canary",
                     screen = "side",
-                    x = 1,
+                    x = 6,
                     y = 1,
-                    w = 1,
+                    w = 6,
                     h = 1,
                 },
                 {
@@ -88,8 +101,8 @@ return {
                     screen = "main",
                     x = 0,
                     y = 0,
-                    w = 2,
-                    h = 2,
+                    w = 1,
+                    h = 1,
                 },
             },
         },

@@ -8,25 +8,44 @@ local function screenResolutionWatcherFnInt(isEvent)
 
     local fixScreenModes = {}
     local fixScreenOrigins = {}
+    local makeScreenPrimary
+    local makeScreenPrimaryPrio = -1
 
     for _, screen in pairs(screens) do
         local name = screen:name()
         local shouldConfig = screenConfigTable[name]
         if shouldConfig then
-            local isMode = screen:currentMode()
-            for param, val in pairs(shouldConfig.mode) do
-                if isMode[param] ~= val then
-                    print("Mismatch on ", name, " ", param, " (is ", isMode[param], "; should be ", val, ")")
-                    fixScreenModes[screen] = shouldConfig.mode
+            if shouldConfig.mode then
+                local isMode = screen:currentMode()
+                for param, val in pairs(shouldConfig.mode) do
+                    if isMode[param] ~= val then
+                        print("Mismatch on ", name, " ", param, " (is ", isMode[param], "; should be ", val, ")")
+                        fixScreenModes[screen] = shouldConfig.mode
+                    end
                 end
             end
 
-            local isOrigin = screen:localToAbsolute({x = 0, y = 0})
-            if isOrigin.x ~= shouldConfig.origin.x or isOrigin.y ~= shouldConfig.origin.y then
-                fixScreenOrigins[screen] = shouldConfig.origin
+            if shouldConfig.origin then
+                local isOrigin = screen:localToAbsolute({x = 0, y = 0})
+                if isOrigin.x ~= shouldConfig.origin.x or isOrigin.y ~= shouldConfig.origin.y then
+                    fixScreenOrigins[screen] = shouldConfig.origin
+                end
+            end
+
+            if shouldConfig.primary and makeScreenPrimaryPrio < shouldConfig.primary then
+                makeScreenPrimaryPrio = shouldConfig.primary
+                makeScreenPrimary = screen
             end
         end
     end
+
+    if makeScreenPrimary and makeScreenPrimary ~= hs.screen.primaryScreen() then
+        local ok = makeScreenPrimary:setPrimary()
+        if not ok then
+            hs.alert.show("This screen is not primary!", {}, makeScreenPrimary, 15)
+        end
+    end
+
     for screen, mode in pairs(fixScreenModes) do
         local isMode = screen:currentMode()
         local ok = screen:setMode(mode.w or isMode.w, mode.h or isMode.h, mode.scale or isMode.scale, mode.freq or isMode.freq, mode.depth or isMode.depth)
