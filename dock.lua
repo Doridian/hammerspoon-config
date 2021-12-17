@@ -38,6 +38,9 @@ function M.start()
     M.stop()
     usbWatcher = hs.usb.watcher.new(usbWatcherFn)
     usbWatcher:start()
+    M.check()
+end
+function M.check()
     activeDockCheck()
 end
 function M.stop()

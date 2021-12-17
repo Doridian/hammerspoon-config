@@ -12,6 +12,7 @@ local function audioDeviceCheck()
         local deviceTable = audioDeviceTable[name]
         if deviceTable and deviceTable.priority > newDevicePrio then
             newDevice = dev
+            newDevicePrio = deviceTable.priority
         end
     end
 
@@ -31,6 +32,9 @@ local M = {}
 function M.start()
     hs.audiodevice.watcher.setCallback(audioDeviceCheck)
     hs.audiodevice.watcher.start()
+    M.check()
+end
+function M.check()
     audioDeviceCheck()
 end
 function M.stop()

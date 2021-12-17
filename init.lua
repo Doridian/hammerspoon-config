@@ -17,3 +17,13 @@ for name, mod in pairs(modules) do
         mod.start()
     end
 end
+
+local function globalReCheck()
+    for name, mod in pairs(modules) do
+        if mod.check then
+            print("Re-check module ", name)
+            mod.check()
+        end
+    end
+end
+hs.hotkey.bind({"ctrl","alt","cmd"}, "k", "Global re-check started", globalReCheck)

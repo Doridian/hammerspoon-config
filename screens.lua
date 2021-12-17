@@ -74,6 +74,9 @@ function M.start()
     M.stop()
     screenResolutionWatcher = hs.screen.watcher.new(screenResolutionWatcherFn)
     screenResolutionWatcher:start()
+    M.check()
+end
+function M.check()
     screenResolutionWatcherFnInt(false)
 end
 function M.stop()
