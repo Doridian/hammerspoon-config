@@ -17,9 +17,9 @@ local function handleEvent(event)
         return false
     end
     
-    local newEvent = hs.eventtap.event.newSystemKeyEvent(newEventKey, true)
-    local newEvent2 = hs.eventtap.event.newSystemKeyEvent(newEventKey, false)
-    return true, {newEvent, newEvent2}
+    local newEventDown = hs.eventtap.event.newSystemKeyEvent(newEventKey, true)
+    local newEventUp = hs.eventtap.event.newSystemKeyEvent(newEventKey, false)
+    return true, {newEventDown, newEventUp}
 end
 
 local M = {}
