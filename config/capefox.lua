@@ -81,6 +81,14 @@ return {
                     h = 1,
                 },
                 {
+                    find = "Spotify",
+                    screen = "side",
+                    x = 7,
+                    y = 0,
+                    w = 5,
+                    h = 1,
+                },
+                {
                     find = "Telegram",
                     screen = "side",
                     x = 0,
@@ -118,6 +126,14 @@ return {
                 },
                 {
                     find = "Music",
+                    screen = "builtin",
+                    x = 1,
+                    y = 0,
+                    w = 1,
+                    h = 1,
+                },
+                {
+                    find = "Spotify",
                     screen = "builtin",
                     x = 1,
                     y = 0,
