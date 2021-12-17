@@ -170,7 +170,7 @@ return {
             priority = 1,
         },
     },
-    load = {"screens", "dock", "audiodevice"},
+    load = {"screens", "dock", "audiodevice", "kbdlight"},
     ctor = function()
         local dock = require("dock")
         local screens = require("screens")
