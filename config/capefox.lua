@@ -218,6 +218,13 @@ return {
         ["Schiit Unison Modius"] = {
             priority = 3,
         },
+        ["Scarlett Solo USB (eqMac)"] = {
+            priority = 4,
+            volume = 100,
+        },
+        ["Scarlett Solo USB"] = {
+            priority = 3,
+        },
         ["MacBook Pro Speakers (eqMac)"] = {
             priority = 2,
         },
