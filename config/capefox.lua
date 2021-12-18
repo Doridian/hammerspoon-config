@@ -1,3 +1,42 @@
+local dock, screens, homeassistant, windowalign
+
+local function applyTheme()
+    if dock.isDocked() then
+        windowalign.load("docked")
+    else
+        windowalign.load("undocked")
+    end
+end
+
+local function screensHandler(isEvent, hasChanges)
+    if isEvent and hasChanges then
+        applyTheme()
+    end
+end
+
+local function dockHandler(isDocked, isEvent)
+    if isDocked then
+        homeassistant.switch("switch.dori_pc_relay", true)
+    end
+    if isEvent then
+        applyTheme()
+    end
+end
+
+local function ctor()
+    dock = require("dock")
+    screens = require("screens")
+    homeassistant = require("homeassistant")
+    windowalign = require("windowalign")
+
+    screens.addHandler(screensHandler)
+    dock.addHandler(dockHandler)
+end
+
+local function check()
+    applyTheme()
+end
+
 return {
     screens = {
         ["LG ULTRAGEAR"] = {
@@ -187,34 +226,6 @@ return {
         },
     },
     load = {"screens", "dock", "audiodevice", "kbdlight"},
-    ctor = function()
-        local dock = require("dock")
-        local screens = require("screens")
-        local homeassistant = require("homeassistant")
-        local windowalign = require("windowalign")
-        local function applyTheme()
-            if dock.isDocked() then
-                windowalign.load("docked")
-            else
-                windowalign.load("undocked")
-            end
-        end
-        screens.addHandler(function(isEvent, hasChanges)
-            if isEvent and hasChanges then
-                applyTheme()
-            end
-        end)
-        dock.addHandler(function(_, isEvent)
-            if isEvent then
-                applyTheme()
-            end
-        end)
-        dock.addHandler(function(isDocked)
-            if isDocked then
-                homeassistant.switch("switch.dori_pc_relay", true)
-            end
-        end)
-        dock.check()
-        applyTheme()
-    end,
+    ctor = ctor,
+    check = check,
 }
