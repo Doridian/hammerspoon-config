@@ -2,6 +2,7 @@ local config = require("config").get("windowalign")
 
 local M = {}
 function M.load(name)
+    print("Loading windowalign", name)
     local layout = config[name]
 
     if layout.margins or config.default.margins then

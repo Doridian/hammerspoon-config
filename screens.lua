@@ -39,7 +39,10 @@ local function screenResolutionWatcherFnInt(isEvent)
         end
     end
 
+    local hasChanges = false
+
     if makeScreenPrimary and makeScreenPrimary ~= hs.screen.primaryScreen() then
+        hasChanges = true
         local ok = makeScreenPrimary:setPrimary()
         if not ok then
             hs.alert.show("This screen is not primary!", {}, makeScreenPrimary, 15)
@@ -47,6 +50,7 @@ local function screenResolutionWatcherFnInt(isEvent)
     end
 
     for screen, mode in pairs(fixScreenModes) do
+        hasChanges = true
         local isMode = screen:currentMode()
         local ok = screen:setMode(mode.w or isMode.w, mode.h or isMode.h, mode.scale or isMode.scale, mode.freq or isMode.freq, mode.depth or isMode.depth)
         if not ok then
@@ -54,6 +58,7 @@ local function screenResolutionWatcherFnInt(isEvent)
         end
     end
     for screen, origin in pairs(fixScreenOrigins) do
+        hasChanges = true
         local ok = screen:setOrigin(origin.x, origin.y)
         if not ok then
             hs.alert.show("This screen is at the wrong position!", {}, screen, 15)
@@ -61,7 +66,7 @@ local function screenResolutionWatcherFnInt(isEvent)
     end
 
     for _, handler in pairs(screenStateHandlers) do
-        handler(isEvent)
+        handler(isEvent, hasChanges)
     end
 end
 local function screenResolutionWatcherFn()

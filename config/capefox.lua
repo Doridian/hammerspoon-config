@@ -199,12 +199,22 @@ return {
                 windowalign.load("undocked")
             end
         end
-        screens.addHandler(applyTheme)
-        dock.addHandler(applyTheme)
+        screens.addHandler(function(isEvent, hasChanges)
+            if isEvent and hasChanges then
+                applyTheme()
+            end
+        end)
+        dock.addHandler(function(_, isEvent)
+            if isEvent then
+                applyTheme()
+            end
+        end)
         dock.addHandler(function(isDocked)
             if isDocked then
                 homeassistant.switch("switch.dori_pc_relay", true)
             end
         end)
+        dock.check()
+        applyTheme()
     end,
 }
