@@ -17,7 +17,7 @@ local function audioDeviceCheck()
     end
 
     local deviceTable = audioDeviceTable[currentDevice:name()]
-    if newDevice and (not deviceTable or deviceTable.priority < newDevicePrio) then
+    if newDevice and deviceTable and deviceTable.priority < newDevicePrio then
         newDevice:setDefaultOutputDevice()
         newDevice:setDefaultEffectDevice()
         currentDevice = newDevice
