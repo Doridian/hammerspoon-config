@@ -19,8 +19,9 @@ function M.load(name)
         end
     end
 
+    local windowConfigs = layout.windows or config.default.windows
     for _, window in pairs(hs.window.visibleWindows()) do
-        local windowConfig = (layout.windows or config.default.windows)[window:application():name()]
+        local windowConfig = windowConfigs[window:application():name()]
         if windowConfig then
             local screen = screens[windowConfig.screen]
             if screen then
