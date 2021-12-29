@@ -19,11 +19,11 @@ function M.load(name)
         end
     end
 
-    for _, windowConfig in pairs(layout.windows or config.default.windows) do
-        local screen = screens[windowConfig.screen]
-        if screen then
-            local windows = hs.window.filter.new(windowConfig.find):getWindows()
-            for _, window in pairs(windows) do
+    for _, window in pairs(hs.window.visibleWindows()) do
+        local windowConfig = (layout.windows or config.default.windows)[window:application():name()]
+        if windowConfig then
+            local screen = screens[windowConfig.screen]
+            if screen then
                 hs.grid.set(window, windowConfig, screen)
             end
         end

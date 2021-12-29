@@ -95,56 +95,63 @@ return {
         },
         docked = {
             windows = {
-                {
-                    find = "Mail",
+                Mail = {
                     screen = "side",
                     x = 0,
                     y = 0,
                     w = 4,
                     h = 1,
                 },
-                {
-                    find = "Deliveries",
+                Deliveries = {
                     screen = "side",
                     x = 4,
                     y = 0,
                     w = 3,
                     h = 1,
                 },
-                {
-                    find = "Music",
+                Music = {
                     screen = "side",
                     x = 7,
                     y = 0,
                     w = 5,
                     h = 1,
                 },
-                {
-                    find = "Spotify",
+                Spotify = {
                     screen = "side",
                     x = 7,
                     y = 0,
                     w = 5,
                     h = 1,
                 },
-                {
-                    find = "Telegram",
+                Telegram = {
                     screen = "side",
                     x = 0,
                     y = 1,
                     w = 6,
                     h = 1,
                 },
-                {
-                    find = "Discord Canary",
+                ["Discord Canary"] = {
                     screen = "side",
                     x = 6,
                     y = 1,
                     w = 6,
                     h = 1,
                 },
-                {
-                    find = "Google Chrome",
+                Discord = {
+                    screen = "side",
+                    x = 6,
+                    y = 1,
+                    w = 6,
+                    h = 1,
+                },
+                Safari = {
+                    screen = "main",
+                    x = 0,
+                    y = 0,
+                    w = 1,
+                    h = 1,
+                },
+                ["Google Chrome"] = {
                     screen = "main",
                     x = 0,
                     y = 0,
@@ -155,48 +162,56 @@ return {
         },
         undocked = {
             windows = {
-                {
-                    find = "Mail",
+                Mail = {
                     screen = "builtin",
                     x = 0,
                     y = 0,
                     w = 1,
                     h = 1,
                 },
-                {
-                    find = "Music",
+                Music = {
                     screen = "builtin",
                     x = 1,
                     y = 0,
                     w = 1,
                     h = 1,
                 },
-                {
-                    find = "Spotify",
+                Spotify = {
                     screen = "builtin",
                     x = 1,
                     y = 0,
                     w = 1,
                     h = 1,
                 },
-                {
-                    find = "Telegram",
+                Telegram = {
                     screen = "builtin",
                     x = 0,
                     y = 1,
                     w = 1,
                     h = 1,
                 },
-                {
-                    find = "Discord Canary",
+                Discord = {
                     screen = "builtin",
                     x = 1,
                     y = 1,
                     w = 1,
                     h = 1,
                 },
-                {
-                    find = "Google Chrome",
+                ["Discord Canary"] = {
+                    screen = "builtin",
+                    x = 1,
+                    y = 1,
+                    w = 1,
+                    h = 1,
+                },
+                ["Google Chrome"] = {
+                    screen = "builtin",
+                    x = 0,
+                    y = 0,
+                    w = 2,
+                    h = 2,
+                },
+                Safari = {
                     screen = "builtin",
                     x = 0,
                     y = 0,
