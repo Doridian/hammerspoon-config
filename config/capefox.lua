@@ -247,7 +247,10 @@ return {
             priority = 1,
         },
     },
-    load = {"screens", "dock", "audiodevice", "kbdlight"},
+    mediakeys = {
+        player = "spotify",
+    },
+    load = {"screens", "dock", "audiodevice", "kbdlight", "mediakeys"},
     ctor = ctor,
     check = check,
 }
