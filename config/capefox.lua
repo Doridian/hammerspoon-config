@@ -109,6 +109,13 @@ return {
                     w = 3,
                     h = 1,
                 },
+                Reminders = {
+                    screen = "side",
+                    x = 4,
+                    y = 0,
+                    w = 3,
+                    h = 1,
+                },
                 Music = {
                     screen = "side",
                     x = 7,
