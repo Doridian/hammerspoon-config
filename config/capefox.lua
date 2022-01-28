@@ -255,7 +255,7 @@ return {
         },
     },
     mediakeys = {
-        player = "spotify",
+        player = "music",
     },
     load = {"screens", "dock", "audiodevice", "kbdlight", "mediakeys"},
     ctor = ctor,
