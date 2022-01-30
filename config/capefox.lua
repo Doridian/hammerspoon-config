@@ -2,9 +2,9 @@ local dock, screens, homeassistant, windowalign
 
 local function applyTheme()
     if dock.isDocked() then
-        windowalign.load("docked")
+        --windowalign.load("docked")
     else
-        windowalign.load("undocked")
+        --windowalign.load("undocked")
     end
 end
 
@@ -25,11 +25,11 @@ end
 
 local function ctor()
     dock = require("dock")
-    screens = require("screens")
+    --screens = require("screens")
     homeassistant = require("homeassistant")
-    windowalign = require("windowalign")
+    --windowalign = require("windowalign")
 
-    screens.addHandler(screensHandler)
+    --screens.addHandler(screensHandler)
     dock.addHandler(dockHandler)
 end
 
@@ -257,7 +257,7 @@ return {
     mediakeys = {
         player = "music",
     },
-    load = {"screens", "dock", "audiodevice", "kbdlight", "mediakeys"},
+    load = {"dock", "audiodevice", "kbdlight", "mediakeys"},
     ctor = ctor,
     check = check,
 }
