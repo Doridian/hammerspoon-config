@@ -12,10 +12,10 @@ local MEDIA_KEY_MAP = {
         mpintf.next()
     end,
     FAST = function()
-        mpintf.ff()
+        mpintf.next()
     end,
     REWIND = function()
-        mpintf.rw()
+        mpintf.previous()
     end,
 }
 
