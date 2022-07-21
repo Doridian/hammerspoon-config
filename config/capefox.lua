@@ -1,18 +1,4 @@
-local dock, screens, homeassistant, windowalign
-
-local function applyTheme()
-    if dock.isDocked() then
-        --windowalign.load("docked")
-    else
-        --windowalign.load("undocked")
-    end
-end
-
-local function screensHandler(isEvent, hasChanges)
-    if isEvent and hasChanges then
-        applyTheme()
-    end
-end
+local dock, homeassistant
 
 local function dockHandler(isDocked, isEvent)
     if isDocked then
@@ -25,16 +11,9 @@ end
 
 local function ctor()
     dock = require("dock")
-    --screens = require("screens")
     homeassistant = require("homeassistant")
-    --windowalign = require("windowalign")
 
-    --screens.addHandler(screensHandler)
     dock.addHandler(dockHandler)
-end
-
-local function check()
-    applyTheme()
 end
 
 return {
@@ -232,32 +211,9 @@ return {
         vendorID = 0x2188,
         productID = 0x0034,
     },
-    audiodevice = {
-        ["Schiit Unison Modius (eqMac)"] = {
-            priority = 2,
-            volume = 100,
-        },
-        ["Schiit Unison Modius"] = {
-            priority = 2,
-        },
-        ["Scarlett Solo USB (eqMac)"] = {
-            priority = 2,
-            volume = 100,
-        },
-        ["Scarlett Solo USB"] = {
-            priority = 2,
-        },
-        ["MacBook Pro Speakers (eqMac)"] = {
-            priority = 1,
-        },
-        ["MacBook Pro Speakers"] = {
-            priority = 1,
-        },
-    },
     mediakeys = {
         player = "spotify",
     },
-    load = {"dock", "audiodevice", "kbdlight", "mediakeys"},
+    load = {"dock", "kbdlight", "mediakeys"},
     ctor = ctor,
-    check = check,
 }
