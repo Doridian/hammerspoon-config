@@ -5,17 +5,33 @@ local headers = {
 }
 
 local M = {}
-function M.control(cls, id, control)
-    local data = hs.json.encode({
-        entity_id = id,
-    })
-    hs.http.asyncPost(secrets.url .. "/api/services/" .. cls .. "/" .. control, data, headers, function(status, body, responseHeaders)
+
+function M.control(cls, id, control, data)
+    if not data then
+        data = {}
+    end
+    data.entity_id = id
+
+    hs.http.asyncPost(secrets.url .. "/api/services/" .. cls .. "/" .. control, hs.json.encode(data), headers, function(status, body, responseHeaders)
         if status == 200 then
             return
         end
         print("HASS control = ", status, body)
     end)
 end
+
+function M.state(id, cb)
+    hs.http.asyncGet(secrets.url .. "/api/states/" .. id, headers, function(status, body, responseHeaders)
+        if status ~= 200 then
+            print("HASS state = ", status, body)
+            cb(nil)
+            return
+        end
+
+        cb(hs.json.decode(body))
+    end)
+end
+
 function M.switch(id, on)
     local control = "turn_off"
     if on then
@@ -23,4 +39,5 @@ function M.switch(id, on)
     end
     return M.control("switch", id, control)
 end
+
 return M

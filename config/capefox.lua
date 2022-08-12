@@ -4,9 +4,6 @@ local function dockHandler(isDocked, isEvent)
     if isDocked then
         homeassistant.switch("switch.dori_pc_relay", true)
     end
-    if isEvent then
-        applyTheme()
-    end
 end
 
 local function ctor()
