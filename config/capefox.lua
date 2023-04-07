@@ -2,7 +2,7 @@ local dock, homeassistant
 
 local function dockHandler(isDocked, isEvent)
     if isDocked then
-        homeassistant.switch("switch.dori_pc_relay", true)
+        homeassistant.switch("switch.dori_desktop_relay", true)
     end
 end
 
